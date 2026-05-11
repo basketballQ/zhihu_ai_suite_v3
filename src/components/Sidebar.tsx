@@ -242,6 +242,21 @@ export default function Sidebar() {
 
   return (
     <div className="sidebar">
+      {/* Logo 区域 */}
+      <div style={{
+        padding: '18px 16px 14px',
+        borderBottom: '1px solid #f0f0f0',
+        display: 'flex',
+        alignItems: 'center',
+        gap: 10,
+      }}>
+        <img src="/logo.svg" alt="logo" style={{ width: 36, height: 36, borderRadius: 8, flexShrink: 0 }} />
+        <div>
+          <div style={{ fontSize: 13, fontWeight: 700, color: '#111', lineHeight: 1.3 }}>知乎 AI 创作增长</div>
+          <div style={{ fontSize: 10, color: '#999', marginTop: 2 }}>工具套件 v3.0</div>
+        </div>
+      </div>
+
       <div className="side-section">
         <div className="side-title">导航</div>
         <div

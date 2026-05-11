@@ -1,0 +1,107 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <!-- 背景渐变：深蓝 → 靛蓝 -->
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1a6eff"/>
+      <stop offset="100%" stop-color="#002fa7"/>
+    </linearGradient>
+    <!-- 主图标渐变：白 → 浅蓝 -->
+    <linearGradient id="iconGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="100%" stop-color="#a0c8ff"/>
+    </linearGradient>
+    <!-- 节点高光 -->
+    <radialGradient id="nodeGlow" cx="50%" cy="30%" r="60%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="100%" stop-color="#60a5fa"/>
+    </radialGradient>
+    <!-- 发光滤镜 -->
+    <filter id="glow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="6" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <filter id="softGlow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="3" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- ── 背景：圆角方形 ── -->
+  <rect width="512" height="512" rx="108" fill="url(#bgGrad)"/>
+
+  <!-- ── 装饰：雷达同心圆弧（左下角，代表"雷达"功能） ── -->
+  <g fill="none" stroke="rgba(255,255,255,0.10)" stroke-width="2.5" stroke-linecap="round">
+    <path d="M 80 432 A 80  80  0 0 1 160 352"/>
+    <path d="M 80 432 A 140 140 0 0 1 220 292"/>
+    <path d="M 80 432 A 200 200 0 0 1 280 232"/>
+  </g>
+
+  <!-- ── 装饰：网格点阵（右上，代表"数据"） ── -->
+  <g fill="rgba(255,255,255,0.12)">
+    <circle cx="340" cy="90"  r="3"/>
+    <circle cx="375" cy="90"  r="3"/>
+    <circle cx="410" cy="90"  r="3"/>
+    <circle cx="445" cy="90"  r="3"/>
+    <circle cx="340" cy="125" r="3"/>
+    <circle cx="375" cy="125" r="3"/>
+    <circle cx="410" cy="125" r="3"/>
+    <circle cx="445" cy="125" r="3"/>
+    <circle cx="340" cy="160" r="3"/>
+    <circle cx="375" cy="160" r="3"/>
+    <circle cx="410" cy="160" r="3"/>
+    <circle cx="445" cy="160" r="3"/>
+  </g>
+
+  <!-- ── 主图标：神经网络 + 上升趋势 ── -->
+
+  <!-- 连接线（底层，半透明） -->
+  <g stroke="rgba(255,255,255,0.35)" stroke-width="4" stroke-linecap="round" fill="none">
+    <!-- 底层节点互连 -->
+    <line x1="152" y1="360" x2="256" y2="360"/>
+    <line x1="256" y1="360" x2="360" y2="360"/>
+    <!-- 底 → 中 -->
+    <line x1="152" y1="360" x2="204" y2="272"/>
+    <line x1="256" y1="360" x2="204" y2="272"/>
+    <line x1="256" y1="360" x2="308" y2="272"/>
+    <line x1="360" y1="360" x2="308" y2="272"/>
+    <!-- 中层互连 -->
+    <line x1="204" y1="272" x2="308" y2="272"/>
+    <!-- 中 → 顶 -->
+    <line x1="204" y1="272" x2="256" y2="175"/>
+    <line x1="308" y1="272" x2="256" y2="175"/>
+  </g>
+
+  <!-- 底层节点（3个） -->
+  <g filter="url(#softGlow)">
+    <circle cx="152" cy="360" r="18" fill="url(#iconGrad)" opacity="0.85"/>
+    <circle cx="256" cy="360" r="18" fill="url(#iconGrad)" opacity="0.85"/>
+    <circle cx="360" cy="360" r="18" fill="url(#iconGrad)" opacity="0.85"/>
+  </g>
+
+  <!-- 中层节点（2个） -->
+  <g filter="url(#softGlow)">
+    <circle cx="204" cy="272" r="22" fill="url(#iconGrad)" opacity="0.92"/>
+    <circle cx="308" cy="272" r="22" fill="url(#iconGrad)" opacity="0.92"/>
+  </g>
+
+  <!-- 顶层节点（1个，最亮） -->
+  <circle cx="256" cy="175" r="30" fill="url(#nodeGlow)" filter="url(#glow)"/>
+
+  <!-- ── 上升箭头（从顶节点向上） ── -->
+  <g stroke="url(#iconGrad)" stroke-width="9" stroke-linecap="round" stroke-linejoin="round" fill="none" filter="url(#glow)">
+    <!-- 竖线 -->
+    <line x1="256" y1="143" x2="256" y2="98"/>
+    <!-- 箭头头部 -->
+    <polyline points="228,122 256,94 284,122"/>
+  </g>
+
+  <!-- ── 底部文字（可选，小号品牌名） ── -->
+  <!-- 留空，保持图标纯净 -->
+
+</svg>
