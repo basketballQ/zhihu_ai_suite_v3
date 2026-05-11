@@ -199,6 +199,7 @@ export default function Virality() {
           <div className="field-hint-p">填写问题有助于 AI 评估「回答与问题的契合度」和「读者预期匹配度」</div>
           <div style={{ display: 'flex', gap: 8 }}>
             <input
+              name="virality-question"
               className="input-area"
               style={{ minHeight: 'unset', height: 38, resize: 'none', flex: 1 }}
               placeholder="粘贴知乎问题链接，或直接输入问题标题..."
@@ -284,7 +285,7 @@ export default function Virality() {
               已输入约 <b style={{ color: '#444' }}>{charCount}</b> 字 · 建议 800–2000 字
             </span>
             <label style={{ display: 'flex', alignItems: 'center', gap: 6, fontSize: 12, color: '#666', cursor: 'pointer' }}>
-              <input type="checkbox" defaultChecked /> 对标该问题 Top 10 高赞回答
+              <input type="checkbox" name="virality-benchmark" defaultChecked /> 对标该问题 Top 10 高赞回答
             </label>
           </div>
           <div style={{ marginTop: 14, display: 'flex', justifyContent: 'flex-end' }}>

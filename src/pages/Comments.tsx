@@ -215,6 +215,7 @@ export default function Comments() {
           <div style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
             <div style={{ position: 'relative', flex: 1 }}>
               <input
+                name="comment-url"
                 className="input-area"
                 style={{ minHeight: 'unset', height: 38, resize: 'none', width: '100%' }}
                 placeholder="知乎问题/文章链接 或 圈子帖子 ID / pin 链接"

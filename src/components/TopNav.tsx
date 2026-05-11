@@ -92,6 +92,7 @@ export default function TopNav() {
 
       <div className="zh-search-wrap" ref={wrapRef}>
         <input
+          name="global-search"
           className="zh-search"
           placeholder="搜索关键词..."
           value={query}

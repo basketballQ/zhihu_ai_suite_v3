@@ -1,3 +1,5 @@
+import { ringApiUrl } from './apiBase';
+
 export interface ZhihuHotItem {
   Title: string;
   Url: string;
@@ -23,7 +25,7 @@ export async function fetchZhihuHotList(limit = 30): Promise<ZhihuHotItem[]> {
   if (!key) throw new Error('NO_ZHIHU_KEY');
 
   const ts = Math.floor(Date.now() / 1000).toString();
-  const res = await fetch(`/zhihu-api/api/v1/content/hot_list?Limit=${limit}`, {
+  const res = await fetch(ringApiUrl(`/api/v1/content/hot_list?Limit=${limit}`), {
     headers: {
       Authorization: `Bearer ${key}`,
       'X-Request-Timestamp': ts,

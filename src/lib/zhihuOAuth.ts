@@ -51,16 +51,17 @@ export function getLoginUrl(): string {
   return `https://openapi.zhihu.com/authorize?${params.toString()}`;
 }
 
-/** 从当前 URL 中提取 OAuth 回调 code */
+/** 从当前 URL 中提取 OAuth 回调 code（兼容 code 和 authorization_code 两种参数名） */
 export function extractCodeFromUrl(): string | null {
   const params = new URLSearchParams(window.location.search);
-  return params.get('code');
+  return params.get('code') ?? params.get('authorization_code');
 }
 
-/** 清除 URL 中的 code 参数，防止刷新后重复换取 */
+/** 清除 URL 中的 code/authorization_code 参数，防止刷新后重复换取 */
 export function clearCodeFromUrl(): void {
   const url = new URL(window.location.href);
   url.searchParams.delete('code');
+  url.searchParams.delete('authorization_code');
   window.history.replaceState({}, '', url.toString());
 }
 

@@ -1,5 +1,21 @@
 {
   "envId": "zhihu-ai-suite-d0grj6raxd4a92341",
+  "functionRoot": "cloudfunctions",
+  "functions": [
+    {
+      "name": "zhihu-proxy",
+      "timeout": 15,
+      "runtime": "Nodejs18.15",
+      "memorySize": 128,
+      "triggers": [
+        {
+          "name": "http",
+          "type": "http",
+          "config": "{\"authRequired\":false,\"invokeRole\":\"EVERYONE\"}"
+        }
+      ]
+    }
+  ],
   "framework": {
     "name": "zhihu-ai-suite",
     "plugins": {

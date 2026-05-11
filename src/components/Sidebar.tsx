@@ -71,6 +71,7 @@ function CircleSection() {
               </div>
               <input
                 ref={inputRef}
+                name="circle-input"
                 className="field-add-input"
                 type="text"
                 placeholder="搜索或输入圈子"
@@ -154,6 +155,7 @@ function FieldSection() {
               ))}
               <input
                 ref={inputRef}
+                name="field-input"
                 className="field-add-input"
                 placeholder="自定义"
                 value={customInput}
