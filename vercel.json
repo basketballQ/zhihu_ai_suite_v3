@@ -1,0 +1,16 @@
+{
+  "rewrites": [
+    {
+      "source": "/zhihu-ring-api/:path*",
+      "destination": "https://openapi.zhihu.com/:path*"
+    },
+    {
+      "source": "/zhihu-api/:path*",
+      "destination": "https://developer.zhihu.com/:path*"
+    },
+    {
+      "source": "/((?!zhihu-ring-api|zhihu-api).*)",
+      "destination": "/index.html"
+    }
+  ]
+}
