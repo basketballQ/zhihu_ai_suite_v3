@@ -9,6 +9,8 @@
  *   VITE_ZHIHU_OAUTH_APP_KEY  - 知乎 OAuth App Key
  */
 
+import { ringApiUrl } from './apiBase';
+
 const APP_ID = (import.meta.env.VITE_ZHIHU_OAUTH_APP_ID as string | undefined) ?? '';
 const APP_KEY = (import.meta.env.VITE_ZHIHU_OAUTH_APP_KEY as string | undefined) ?? '';
 
@@ -79,7 +81,7 @@ export async function exchangeToken(code: string): Promise<string> {
     code,
   });
 
-  const res = await fetch('/zhihu-ring-api/access_token', {
+  const res = await fetch(ringApiUrl('/access_token'), {
     method: 'POST',
     headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
     body: body.toString(),
@@ -117,7 +119,7 @@ export async function exchangeToken(code: string): Promise<string> {
  * GET /zhihu-ring-api/user
  */
 export async function fetchZhihuOAuthUser(token: string): Promise<ZhihuOAuthUser> {
-  const res = await fetch('/zhihu-ring-api/user', {
+  const res = await fetch(ringApiUrl('/user'), {
     headers: { Authorization: `Bearer ${token}` },
   });
 

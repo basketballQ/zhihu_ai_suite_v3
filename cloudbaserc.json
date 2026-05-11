@@ -1,0 +1,37 @@
+{
+  "envId": "{{ENV_ID}}",
+  "framework": {
+    "name": "zhihu-ai-suite",
+    "plugins": {
+      "client": {
+        "use": "@cloudbase/framework-plugin-website",
+        "inputs": {
+          "buildCommand": "npm run build",
+          "outputPath": "dist",
+          "cloudPath": "/"
+        }
+      },
+      "proxy": {
+        "use": "@cloudbase/framework-plugin-function",
+        "inputs": {
+          "functionRootPath": "cloudfunctions",
+          "functions": [
+            {
+              "name": "zhihu-proxy",
+              "timeout": 15,
+              "runtime": "Nodejs18.15",
+              "memorySize": 128,
+              "triggers": [
+                {
+                  "name": "http",
+                  "type": "http",
+                  "config": "{\"authRequired\":false,\"invokeRole\":\"EVERYONE\"}"
+                }
+              ]
+            }
+          ]
+        }
+      }
+    }
+  }
+}

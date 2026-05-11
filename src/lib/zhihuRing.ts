@@ -1,3 +1,5 @@
+import { ringApiUrl } from './apiBase';
+
 export interface RingInfo {
   ring_id: string;
   ring_name: string;
@@ -89,7 +91,7 @@ export async function fetchRingDetail(ringId: string, pageSize = 20): Promise<Ri
   const sign = await buildSign(appKey, appSecret, timestamp, logId);
 
   const res = await fetch(
-    `/zhihu-ring-api/openapi/ring/detail?ring_id=${ringId}&page_size=${pageSize}&page_num=1`,
+    ringApiUrl(`/openapi/ring/detail?ring_id=${ringId}&page_size=${pageSize}&page_num=1`),
     {
       headers: {
         'X-App-Key': appKey,
@@ -127,7 +129,7 @@ export async function publishPin(ringId: string, title: string, content: string)
     ring_id: ringId,
   };
 
-  const res = await fetch(`/zhihu-ring-api/openapi/publish/pin`, {
+  const res = await fetch(ringApiUrl('/openapi/publish/pin'), {
     method: 'POST',
     headers: {
       'X-App-Key': appKey,
@@ -165,7 +167,7 @@ export async function createComment(contentType: 'pin' | 'comment', contentToken
     content,
   };
 
-  const res = await fetch(`/zhihu-ring-api/openapi/comment/create`, {
+  const res = await fetch(ringApiUrl('/openapi/comment/create'), {
     method: 'POST',
     headers: {
       'X-App-Key': appKey,
@@ -277,7 +279,7 @@ export async function fetchPinComments(
     page_num: String(pageNum),
   });
 
-  const res = await fetch(`/zhihu-ring-api/openapi/comment/list?${params}`, {
+  const res = await fetch(ringApiUrl(`/openapi/comment/list?${params}`), {
     headers: {
       'X-App-Key': appKey,
       'X-Timestamp': timestamp,

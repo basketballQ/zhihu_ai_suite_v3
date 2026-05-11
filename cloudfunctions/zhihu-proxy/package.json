@@ -1,0 +1,6 @@
+{
+  "name": "zhihu-proxy",
+  "version": "1.0.0",
+  "description": "知乎 API 代理云函数",
+  "main": "index.js"
+}
