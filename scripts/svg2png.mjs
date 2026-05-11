@@ -6,13 +6,13 @@ import { fileURLToPath } from 'url';
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const root = resolve(__dirname, '..');
 
-const input  = resolve(root, 'public/logo.svg');
-const output = resolve(root, 'public/logo.png');
+const input  = resolve(root, 'public/logo-315x175.svg');
+const output = resolve(root, 'public/logo-315x175.png');
 
 const svg = readFileSync(input, 'utf-8');
 
 const resvg = new Resvg(svg, {
-  fitTo: { mode: 'original' },        // 按 SVG 原始尺寸导出（512×512）
+  fitTo: { mode: 'original' },        // 按 SVG 原始尺寸导出（315×175）
   font: { loadSystemFonts: false },
 });
 
