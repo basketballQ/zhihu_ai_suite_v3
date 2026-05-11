@@ -1,0 +1,23 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm install *)",
+      "Bash(npm run *)",
+      "Bash(npx vite *)",
+      "Bash(taskkill /F /IM node.exe)",
+      "Bash(exit 0)",
+      "PowerShell(Rename-Item \"E:\\\\Projects\\\\zhihu_ai_suite_v3\\\\����.bat\" \"start.bat\")",
+      "WebFetch(domain:www.zhihu.com)",
+      "Bash(cd /d E:\\\\Projects\\\\zhihu_ai_suite_v3)",
+      "Bash(npx tsc *)",
+      "mcp__Claude_Preview__preview_start",
+      "Bash(dir \"E:\\\\Projects\\\\zhihu_ai_suite_v3\" /B)",
+      "Bash(dir \"E:\\\\Projects\\\\zhihu_ai_suite_v3\" /B /A)",
+      "Bash(git -C \"E:\\\\Projects\\\\zhihu_ai_suite_v3\" status)",
+      "Bash(git -C \"E:\\\\Projects\\\\zhihu_ai_suite_v3\" remote -v)",
+      "Bash(git init *)",
+      "Bash(git add *)",
+      "Bash(git commit -m 'feat: 知乎AI创作增长工具套件 v3 初始提交 *)"
+    ]
+  }
+}
