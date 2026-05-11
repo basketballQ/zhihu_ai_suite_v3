@@ -6,14 +6,14 @@ import { fileURLToPath } from 'url';
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const root = resolve(__dirname, '..');
 
-const input  = resolve(root, 'public/logo-315x175.svg');
+const input  = resolve(root, 'public/logo.svg');
 const output = resolve(root, 'public/logo.png');
 
 const svg = readFileSync(input, 'utf-8');
 
 const resvg = new Resvg(svg, {
-  fitTo: { mode: 'width', value: 315 },
-  font: { loadSystemFonts: false },   // 不加载系统字体，避免平台差异
+  fitTo: { mode: 'original' },        // 按 SVG 原始尺寸导出（512×512）
+  font: { loadSystemFonts: false },
 });
 
 const pngData = resvg.render();
