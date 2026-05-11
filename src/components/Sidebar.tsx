@@ -257,6 +257,9 @@ export default function Sidebar() {
         </div>
       </div>
 
+      {/* 账号登录区（置顶） */}
+      <AccountSection />
+
       <div className="side-section">
         <div className="side-title">导航</div>
         <div
@@ -284,7 +287,6 @@ export default function Sidebar() {
 
       <CircleSection />
       <FieldSection />
-      <AccountSection />
     </div>
   );
 }

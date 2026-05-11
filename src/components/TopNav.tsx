@@ -17,7 +17,7 @@ function buildSearchResults(keyword: string): SearchResult[] {
 }
 
 export default function TopNav() {
-  const { activeTool, updateHotByKeyword, updateRadarByKeyword, showToast } = useApp();
+  const { activeTool, updateHotByKeyword, updateRadarByKeyword, showToast, zhihuUser } = useApp();
   const [query, setQuery] = useState('');
   const [popoverOpen, setPopoverOpen] = useState(false);
   const composingRef = useRef(false);
@@ -122,9 +122,25 @@ export default function TopNav() {
         </div>
       </div>
 
-      <div style={{ display: 'flex', gap: 8, marginLeft: 'auto', alignItems: 'center' }}>
-        <div className="zh-user">我</div>
-      </div>
+      {zhihuUser && (
+        <div style={{ display: 'flex', gap: 8, marginLeft: 'auto', alignItems: 'center' }}>
+          <img
+            src={zhihuUser.avatar_path}
+            alt={zhihuUser.fullname}
+            title={zhihuUser.fullname}
+            style={{ width: 32, height: 32, borderRadius: '50%', objectFit: 'cover', border: '2px solid #e8e8e8', flexShrink: 0 }}
+            onError={e => {
+              const el = e.currentTarget as HTMLImageElement;
+              el.style.display = 'none';
+              (el.nextElementSibling as HTMLElement | null)?.style.setProperty('display', 'flex');
+            }}
+          />
+          {/* 头像加载失败时的文字兜底 */}
+          <div className="zh-user" style={{ display: 'none' }}>
+            {zhihuUser.fullname.charAt(0)}
+          </div>
+        </div>
+      )}
     </div>
   );
 }
