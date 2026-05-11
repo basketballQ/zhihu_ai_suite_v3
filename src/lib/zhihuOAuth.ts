@@ -85,14 +85,31 @@ export async function exchangeToken(code: string): Promise<string> {
     body: body.toString(),
   });
 
-  if (!res.ok) throw new Error(`Token 换取失败 (HTTP ${res.status})`);
+  // 先读原始文本，便于调试
+  const rawText = await res.text();
+  console.log('[OAuth] /access_token 原始响应:', rawText);
 
-  const data = await res.json() as Record<string, unknown>;
-  if (typeof data.access_token !== 'string' || !data.access_token) {
-    throw new Error((data.data as string | undefined) ?? 'access_token 字段缺失');
+  if (!res.ok) throw new Error(`Token 换取失败 (HTTP ${res.status})：${rawText.slice(0, 200)}`);
+
+  let data: Record<string, unknown>;
+  try {
+    data = JSON.parse(rawText) as Record<string, unknown>;
+  } catch {
+    throw new Error(`响应不是合法 JSON：${rawText.slice(0, 200)}`);
   }
 
-  return data.access_token;
+  // 知乎 OAuth 成功：直接返回 access_token
+  if (typeof data.access_token === 'string' && data.access_token) {
+    return data.access_token;
+  }
+
+  // 知乎 OAuth 错误格式：{ code: 400, data: "..." } 或 { error: "...", error_description: "..." }
+  const errMsg =
+    (data.data as string | undefined) ??
+    (data.error_description as string | undefined) ??
+    (data.error as string | undefined) ??
+    `未知错误：${rawText.slice(0, 200)}`;
+  throw new Error(errMsg);
 }
 
 /**
@@ -104,12 +121,21 @@ export async function fetchZhihuOAuthUser(token: string): Promise<ZhihuOAuthUser
     headers: { Authorization: `Bearer ${token}` },
   });
 
-  if (!res.ok) throw new Error(`用户信息获取失败 (HTTP ${res.status})`);
+  const rawText = await res.text();
+  console.log('[OAuth] /user 原始响应:', rawText);
 
-  const data = await res.json() as Record<string, unknown>;
+  if (!res.ok) throw new Error(`用户信息获取失败 (HTTP ${res.status})：${rawText.slice(0, 200)}`);
+
+  let data: Record<string, unknown>;
+  try {
+    data = JSON.parse(rawText) as Record<string, unknown>;
+  } catch {
+    throw new Error(`用户接口响应不是合法 JSON：${rawText.slice(0, 200)}`);
+  }
+
   // 错误响应格式：{ code: 401, data: "..." }
   if (typeof data.code === 'number' && data.code !== 0) {
-    throw new Error((data.data as string | undefined) ?? '获取用户信息出错');
+    throw new Error((data.data as string | undefined) ?? `用户接口错误 code=${data.code}`);
   }
 
   return data as unknown as ZhihuOAuthUser;

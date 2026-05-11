@@ -13,6 +13,7 @@ export default defineConfig({
       '/zhihu-ring-api': {
         target: 'https://openapi.zhihu.com',
         changeOrigin: true,
+        secure: false,
         rewrite: (path) => path.replace(/^\/zhihu-ring-api/, ''),
       },
     },
